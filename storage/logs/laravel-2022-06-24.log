@@ -1,0 +1,16 @@
+[2022-06-24 03:11:34] local.ERROR: Trait 'Spatie\Translatable\HasTranslations' not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait 'Spatie\\Translatable\\HasTranslations' not found at /Users/asifraza/Documents/proejcts/laravel/ext/adeel/service_onDemand/app/GalleryCategory.php:9)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-24 03:12:25] local.ERROR: Trait 'Spatie\Translatable\HasTranslations' not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait 'Spatie\\Translatable\\HasTranslations' not found at /Users/asifraza/Documents/proejcts/laravel/ext/adeel/service_onDemand/app/GalleryCategory.php:9)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-24 04:42:35] local.ERROR: Trait 'Spatie\Translatable\HasTranslations' not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait 'Spatie\\Translatable\\HasTranslations' not found at /Users/asifraza/Documents/proejcts/laravel/ext/adeel/service_onDemand/app/GalleryCategory.php:9)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-24 04:43:27] local.ERROR: Trait 'Spatie\Translatable\HasTranslations' not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait 'Spatie\\Translatable\\HasTranslations' not found at /Users/asifraza/Documents/proejcts/laravel/ext/adeel/service_onDemand/app/GalleryCategory.php:9)
+[stacktrace]
+#0 {main}
+"} 
