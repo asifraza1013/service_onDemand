@@ -30,6 +30,8 @@ class BuyerController extends Controller
     
     public function buyerDashboard()
     {
+        toastr_success('This feature is under development. Will be available soon.');
+        return redirect('/');
         $buyer_id = Auth::guard('web')->user()->id;
 
         $pending_order = Order::where(['buyer_id'=>$buyer_id, 'status'=>0])->count();

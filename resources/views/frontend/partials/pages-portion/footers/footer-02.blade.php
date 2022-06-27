@@ -1,3 +1,8 @@
+<style>
+    .footer-area h6, .footer-area li, .footer-area a, .footer-area span{
+        color: white !important
+    }
+</style>
 <footer class="footer-area gradient-footer color-two">
     <div class="footer-top padding-top-100 padding-bottom-70">
         <div class="container container-two">

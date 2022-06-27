@@ -3,6 +3,10 @@
 /public/media
 /public/storage
 /storage/*.key
+/storage/framework/*.
+/storage/framework/.*
+/storage/logs/*.
+/storage/logs/.*
 /vendor
 .env
 .env.backup

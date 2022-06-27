@@ -50,6 +50,8 @@ class SellerController extends Controller
 
     public function sellerDashboard()
     {
+        toastr_success('This feature is under development. Will be available soon.');
+        return redirect('/');
         $total_earnings = 0;
         $seller_id = Auth::guard('web')->user()->id;
         $pending_order = Order::where(['status'=>0,'seller_id'=>$seller_id])->count();
@@ -1430,8 +1432,7 @@ class SellerController extends Controller
         $all_messages = SupportTicketMessage::where(['support_ticket_id'=>$id])->get();
         $q = $request->q ?? '';
         foreach(Auth::guard('web')->user()->unreadNotifications as $notification){
-
-            if($ticket_details->id == $notification->data['seller_last_ticket_id']){
+            if(isset($notification->data['seller_last_ticket_id']) && $ticket_details->id == $notification->data['seller_last_ticket_id'] ){
                 $Notification = Auth::guard('web')->user()->Notifications->find($notification->id);
                 if($Notification){
                     $Notification->markAsRead();

@@ -4403,7 +4403,7 @@ ul {
 }
 .widget .footer-inner .footer-para {
   font-size: 16px;
-  color: var(--light-color);
+  color: white;
   line-height: 28px;
 }
 .widget .footer-inner .footer-link-list {
