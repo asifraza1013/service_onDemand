@@ -148,6 +148,13 @@ $reg_type = request()->get('type') ?? 'buyer';
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="single-info-service margin-top-30">
+                                                <div class="single-content">
+                                                    <label class="forms-label"> {{ __('Zip Code*') }} </label>
+                                                    <input class="form-control" type="text" name="zip_code" id="zip_code"
+                                                        placeholder="Zip Code">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <input type="button" name="next" class="next action-button" value="{{__('Next')}}" />
