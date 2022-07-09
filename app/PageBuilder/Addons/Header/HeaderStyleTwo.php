@@ -129,17 +129,27 @@ return <<<HTML
     <div class="banner-area home-two-banner section-bg-2">
         <div class="container container-two">
             <div class="row justify-content-between align-items-center">
-                <div class="col-xl-5">
+                <div class="col-xl-6">
                     <div class="banner-contents style-02">
                         <h1 class="banner-title">{$title_start} <span class="span-shape"> {$title_end} </span> </h1>
                         <span class="title-top">{$subtitle}</span>
                         <div class="banner-bottom-content">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">HIRE A PRO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">FIND CUSTOMERS</a>
+                            </li>
+                        </ul>
                             <form action="{$search_route}" class="banner-search-form" method="get">
                                 <div class="banner-address-select">
-                                    <select name="service_city">
+                                    <!-- <select name="service_city">
                                         <option value="">{$select_location}</option>
                                         {$service_city_markup}
-                                    </select>
+                                    </select> -->
+                                    <i class="fa fa-check"></i>
+                                <input class="form-control border-0 mt-2" type="tel" name="zip_code" id="zip_code" placeholder="Zip Code">
                                 </div>
                                 <div class="banner-address-select">
                                     <select name="service_category">

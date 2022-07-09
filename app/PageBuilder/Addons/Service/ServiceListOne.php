@@ -216,6 +216,11 @@ foreach ($all_services as $service)
     }else{
         $featured ='';
     }
+    if($service->service_type == 1){
+        $serviceType = '<div class=""><span class="badge badge-pill badge-success">Regular</span></div>';
+    }else{
+        $serviceType ='<div class=""><span class="badge badge-pill badge-danger">Emergency</span></div>';
+    }
     if($service->is_service_online==1){
         $service_city =  'Service';
         $service_country =  'Online';
@@ -245,6 +250,7 @@ foreach ($all_services as $service)
                 <a href="{$route}" class="service-thumb service-bg-thumb-format" {$image}>
                 
                 {$featured}
+                {$serviceType}
                 <div class="country_city_location">
                     <span class="single_location"> <i class="las la-map-marker-alt"></i> {$service_country}, {$service_city} </span>
                 </div>

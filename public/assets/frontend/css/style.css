@@ -2623,6 +2623,12 @@ ul {
   font-weight: 900;
   margin-right: 10px;
 }
+.banner-address-select #zip_code::before {
+  content: "";
+  font-family: "Line Awesome Free";
+  font-weight: 900;
+  margin-right: 10px;
+}
 @media (min-width: 1200px) and (max-width: 1399.98px) {
   .banner-contents.style-02 .banner-bottom-content .banner-search-form .banner-address-select .nice-select::before {
     margin-right: 5px;
@@ -2664,8 +2670,8 @@ ul {
   color: #fff;
   border: 0;
   outline: none;
-  height: 60px;
-  padding: 0 35px;
+  height: 45px;
+  padding: 0 25px;
   border-radius: 10px;
   position: absolute;
   top: 50%;

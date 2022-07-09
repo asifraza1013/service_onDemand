@@ -110,6 +110,7 @@ class RegisterController extends Controller
                 'service_city' => 'required',
                 'service_area' => 'required',
                 'country' => 'required',
+                'zip_code' => 'required',
             ]);
 
             $email_verify_tokn = Str::random(8);
@@ -124,6 +125,7 @@ class RegisterController extends Controller
                 'country_id' => $request->country,
                 'user_type' => $request->get_user_type,
                 'terms_conditions' =>1,
+                'post_code' =>$request->zip_code,
                 'email_verify_token'=> $email_verify_tokn,
             ]);
 
