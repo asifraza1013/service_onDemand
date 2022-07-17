@@ -136,21 +136,22 @@ class ServiceListOne extends PageBuilderBase
         }
         if(!empty(request()->get('rating'))){
             $rating = (int) request()->get('rating');
-            $service_quyery->whereHas('reviews', function ($q) use ($rating) {
-                $q->groupBy('reviews.id')
-                ->havingRaw('AVG(reviews.rating) >= ?', [$rating])
-                ->havingRaw('AVG(reviews.rating) < ?', [$rating + 1]);
-            });
+            $service_quyery->where('service_type', $rating);
+            // $service_quyery->whereHas('reviews', function ($q) use ($rating) {
+            //     $q->groupBy('reviews.id')
+            //     ->havingRaw('AVG(reviews.rating) >= ?', [$rating])
+            //     ->havingRaw('AVG(reviews.rating) < ?', [$rating + 1]);
+            // });
         }
         
         $rating_stars = [
-            '1' => __('One Star'),
-            '2' => __('Two Star'),
-            '3' => __('Three Star'),
-            '4' => __('Four Star'),
-            '5' => __('Five Star'),
+            '1' => __('Regular'),
+            '2' => __('Emergency'),
+            // '3' => __('Three Star'),
+            // '4' => __('Four Star'),
+            // '5' => __('Five Star'),
         ];
-        $search_by_rating_markup = '<option value=""> '.__('Select Star').'</option>';   
+        $search_by_rating_markup = '<option value=""> '.__('Select Service Type').'</option>';   
         foreach($rating_stars as $value => $text){
             $ratings_selection = !empty(request()->get('rating')) && request()->get('rating') == $value ? 'selected' : '';
             $search_by_rating_markup .= '<option value="'.$value.'" '.$ratings_selection.' > '.$text.'</option>';   
