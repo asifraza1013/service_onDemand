@@ -37,6 +37,7 @@
                                 <th>{{__('ID')}}</th>
                                 <th>{{__('Title')}}</th>
                                 <th>{{__('Price')}}</th>
+                                <th>{{__('Type')}}</th>
                                 <th>{{__('Status')}}</th>
                                 <th>{{__('Create Date')}}</th> 
                                 <th>{{__('Featured')}}</th> 
@@ -71,6 +72,7 @@
                         {data: 'id', name: 'id'},
                         {data: 'title', name: '', orderable: true, searchable: true},
                         {data: 'price', name: '', orderable: true, searchable: true},
+                        {data: 'service_type', searchable: true},
                         {data: 'status', name: ''},
                         {data: 'create_date', name: ''},
                         {data: 'featured', name: ''},

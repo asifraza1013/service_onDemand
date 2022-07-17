@@ -133,7 +133,7 @@
     
     <div class="main-content-inner">
         <div class="row">
-            <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
+            {{-- <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
                 <div class="single-orders">
                     <div class="orders-shapes">
                         <img src="{{ asset('assets/frontend/img/static/orders-shapes.png') }}" alt="">
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
                 <div class="single-orders">
                     <div class="orders-shapes">
@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
+            {{-- <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
                 <div class="single-orders">
                     <div class="orders-shapes">
                         <img src="{{ asset('assets/frontend/img/static/orders-shapes3.png') }}" alt="">
@@ -245,7 +245,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-xl-3 col-md-6 margin-top-30 orders-child">
                 <div class="single-orders">
                     <div class="orders-shapes">

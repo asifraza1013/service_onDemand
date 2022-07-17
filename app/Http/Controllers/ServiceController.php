@@ -55,6 +55,10 @@ class ServiceController extends Controller
                     $row->featured == 1 ? $featured = __('Yes') : $featured = __('No');
                     return $featured;
                 })
+                ->addColumn('service_type', function ($row) {
+                    $row->service_type == 1 ? $serviceType = '<span class="badge badge-success">'. __("Regular") .'</span>' : $serviceType = '<span class="badge badge-danger">'. __("Emergency").'</span>';
+                    return $serviceType;
+                })
                 ->addColumn('action', function ($row) {
                     $action = '';
                     $admin = auth()->guard('admin')->user();
@@ -72,7 +76,7 @@ class ServiceController extends Controller
                     }
                     return $action;
                 })
-                ->rawColumns(['checkbox', 'status', 'action'])
+                ->rawColumns(['checkbox', 'status', 'action', 'service_type'])
                 ->make(true);
         }
         return view('backend.pages.services.index');

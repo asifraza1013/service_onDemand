@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-sm-4 clearfix">
+                {{-- <div class="col-md-6 col-sm-4 clearfix">
                     <ul class="notification-area pull-right">
                         <li ><label class="switch yes">
                             <input id="darkmode" type="checkbox" data-mode={{ get_static_option('site_admin_dark_mode') }} @if(get_static_option('site_admin_dark_mode') == 'on') checked @else @endif>
@@ -89,7 +89,7 @@
                         <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                         <li><a class="btn @if(get_static_option('site_admin_dark_mode') == 'off')btn-primary @else btn-dark  @endif" target="_blank" href="{{url('/')}}"><i class="fas fa-external-link-alt mr-1"></i>   {{__('View Site')}} </a></li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -144,6 +144,9 @@
 
 <script>
     (function ($){
+        setTimeout(() => {
+            $('.alert-warning').css('display', 'none')
+        }, 100);
         "use strict";
 
 
