@@ -155,8 +155,18 @@
                                             <small class="text-danger">{{__('must be embed code from youtube.')}}</small>
                                         </div>
                                     </div>
-                                    
-                                    <div class="row mt-4">
+                                    <div class="single-dashboard-input">
+                                        <div class="single-info-input margin-top-30">
+                                            <label for="category" class="info-title"> {{__('Select Service Type*')}} </label>
+                                            <select name="service_type">
+                                                <option value="">{{__('Select Category')}}</option>
+                                                @foreach(config('constants.service_type') as $key=>$cat)
+                                                <option value="{{ $cat }}" @if($cat==$service->service_type) selected @endif>{{ $key }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>                                       
+                                    </div>
+                                    {{-- <div class="row mt-4">
                                         <div class="col-lg-12">
                                             <div class="card">
                                                 <div class="card-body meta">
@@ -287,7 +297,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="btn-wrapper margin-top-40">
                                         <input type="submit" class="btn btn-success btn-bg-1" value="{{__('Update Service')}} ">

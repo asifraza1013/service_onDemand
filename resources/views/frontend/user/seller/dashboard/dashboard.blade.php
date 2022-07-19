@@ -138,7 +138,7 @@
                         </div>
                         <div class="single-flex-middle">
                             <div class="single-flex-middle-inner">
-                                <div class="line-charts-wrapper margin-top-40">
+                                {{-- <div class="line-charts-wrapper margin-top-40">
                                     <div class="line-top-contents">
                                         <h5 class="earning-title">{{ __('To Do List') }}</h5>
                                         <div class="line-chart-select style-02">
@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                </div>
+                                </div> --}}
                                 <div class="line-charts-wrapper margin-top-40">
                                     <div class="line-top-contents">
                                         <h5 class="earning-title">{{ __('This Month Summery') }} </h5>

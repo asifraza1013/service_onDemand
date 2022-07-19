@@ -50,8 +50,8 @@ class SellerController extends Controller
 
     public function sellerDashboard()
     {
-        toastr_success('This feature is under development. Will be available soon.');
-        return redirect('/');
+        // toastr_success('This feature is under development. Will be available soon.');
+        // return redirect('/');
         $total_earnings = 0;
         $seller_id = Auth::guard('web')->user()->id;
         $pending_order = Order::where(['status'=>0,'seller_id'=>$seller_id])->count();
@@ -350,6 +350,7 @@ class SellerController extends Controller
                 'title' => 'required|max:191|unique:services',
                 'description' => 'required|min:150',
                 'slug' => 'required',
+                'service_type' => 'required',
             ]);
             
             
@@ -365,6 +366,7 @@ class SellerController extends Controller
             $service->seller_id = Auth::guard('web')->user()->id;
             $service->service_city_id = Auth::guard('web')->user()->service_city;
             $service->status = 0;
+            $service->service_type = $request->service_type;
             $service->tax = $request->tax;
 
             $Metas = [

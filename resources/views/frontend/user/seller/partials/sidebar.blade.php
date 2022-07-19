@@ -19,9 +19,9 @@
                 <li class="list @if(request()->is('seller/dashboard*')) active @endif">
                     <a href="{{ route('seller.dashboard') }}"> <i class="las la-th"></i> {{__('Dashboard')}} </a>
                 </li>
-                <li class="list @if(request()->is('seller/coupons*')) active @endif">
+                {{-- <li class="list @if(request()->is('seller/coupons*')) active @endif">
                     <a href="{{ route('seller.service.coupon') }}"> <i class="las la-gifts"></i> {{__('Service Coupons')}} </a>
-                </li>
+                </li> --}}
                 <li class="list @if(request()->is('seller/services*') || request()->is('seller/add-services*') || request()->is('seller/service-attributes*') || request()->is('seller/edit-services*') || request()->is('seller/edit-service-attributes*') || request()->is('seller/add-service-attributes-by-id*')) active @endif">
                     <a href="{{ route('seller.services') }}"> <i class="las la-cogs"></i>{{ __('Services') }} </a>
                 </li>
@@ -40,18 +40,18 @@
                 <li class="list @if(request()->is('seller/notification/all-notifications*')) active @endif">
                     <a href="{{ route('seller.notification.all') }}"> <i class="las la-bell"></i> {{ __('All Notifications') }} </a>
                 </li>
-                <li class="list @if(request()->is('seller/payout-request*')) active @endif">
+                {{-- <li class="list @if(request()->is('seller/payout-request*')) active @endif">
                     <a href="{{ route('seller.payout') }}"> <i class="las la-dollar-sign"></i>{{ __('Payout History') }} </a>
-                </li>
+                </li> --}}
                 <li class="list @if(request()->is('seller/service-reviews*')) active @endif">
                     <a href="{{ route('seller.service.review') }}"> <i class="lar la-star"></i>{{ __('Review') }}</a>
                 </li>
                 <li class="list @if(request()->is('seller/all-tickets*')) active @endif">
                     <a href="{{ route('seller.support.ticket') }}"> <i class="las la-headset"></i>{{ __('Support Ticket') }}</a>
                 </li>
-                <li class="list @if(request()->is('seller/to-do-list*')) active @endif">
+                {{-- <li class="list @if(request()->is('seller/to-do-list*')) active @endif">
                     <a href="{{ route('seller.todolist') }}"> <i class="las la-list"></i>{{ __('Todo List') }}</a>
-                </li>
+                </li> --}}
                 <li class="list @if(request()->is('seller/profile*')) active @endif">
                     <a href="{{ route('seller.profile')}}"> <i class="las la-user"></i> {{__('Profile')}} </a>
                 </li>
