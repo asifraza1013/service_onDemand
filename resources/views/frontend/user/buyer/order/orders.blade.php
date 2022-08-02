@@ -50,6 +50,8 @@
                                                     <th> {{ __('Service Date') }} </th>
                                                     <th> {{ __('Service Time') }} </th>
                                                     <th> {{ __('Order Pricing') }} </th>
+                                                    <th> {{ __('Amount Paid') }} </th>
+                                                    <th> {{ __('Amount remaining') }} </th>
                                                     <th> {{ __('Order Status') }} </th>
                                                     <th> {{ __('Order Type') }} </th>
                                                     <th> {{ __('Order Complete Request') }} </th>
@@ -64,6 +66,8 @@
                                                         <td data-label="{{__('Service Date')}}"> {{ Carbon\Carbon::parse($order->date)->format('d/m/y') }}</td>
                                                         <td data-label="{{__('Service Time')}}"> {{ $order->schedule }}</td>
                                                         <td data-label="{{__('Order Pricing')}}"> {{ float_amount_with_currency_symbol($order->total) }}</td>
+                                                        <td data-label="{{__('Order Pricing')}}"> {{ float_amount_with_currency_symbol($order->pay_before) }}</td>
+                                                        <td data-label="{{__('Order Pricing')}}"> {{ float_amount_with_currency_symbol($order->pay_after) }}</td>
 
                                                         @if ($order->status == 0) <td data-label="{{__('Order Status')}}" class="pending"><span>{{ __('Pending') }}</span></td>@endif
                                                         @if ($order->status == 1) <td data-label="{{__('Order Status')}}" class="order-active"><span>{{ __('Active') }}</span></td>@endif
@@ -105,6 +109,16 @@
                                                                 </span>
                                                             </a>
                                                             @endif
+                                                            <a href="#0" class="edit_status_modal" 
+                                                            data-toggle="modal"
+                                                            data-target="#editStatusModal" 
+                                                            data-id="{{ $order->id }}"
+                                                            data-status="{{ $order->status }}"
+                                                            >
+                                                            <span class="dash-icon color-1" data-toggle="tooltip" data-placement="top" title="{{ __('Change Status') }}"> 
+                                                                <i class="las la-edit"></i>
+                                                            </span>
+                                                            </a>
                                                             <a href="{{ route('buyer.order.details', $order->id) }}">
                                                                 <span class="icon eye-icon" data-toggle="tooltip" data-placement="top" title="{{ __('View Details') }}">
                                                                     <i class="las la-eye"></i>
@@ -194,6 +208,51 @@
         </form>
     </div>
 
+            <!--Status Modal -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1" role="dialog" aria-labelledby="editModal"
+    aria-hidden="true">
+        <form action="{{ route('buyer.change.order.status') }}" method="post">
+            <input type="hidden" id="order_id_status" name="order_id">
+            @csrf
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModal">{{ __('Change Status') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="mb-3 text-danger">
+                            <li><strong>{{ __('Status Meaning:') }}</strong></li>
+                            <li>{{ __('Pending: Did not start the job yet.') }}</li>
+                            <li>{{ __('Active: Job already started.') }}</li>
+                            <li>{{ __('Delivered: Order Deliverd For Checking.') }}</li>
+                            <li>{{ __('Completed: Order is completed and closed.') }}</li>
+                        </ul>
+
+                        <div class="form-group">
+                            <label for="up_day_id">{{ __('Select Status') }}</label>
+                            <select name="status" id="status" class="form-control nice-select">
+                                <option value="">{{ __('Select Status') }}</option>
+                                {{-- <option value="0">{{ __('Pending') }}</option> --}}
+                                <option value="1">{{ __('Active') }}</option>
+                                {{-- <option value="2">{{ __('Completed') }}</option> --}}
+                                {{-- <option value="3">{{ __('Delivered') }}</option> --}}
+                                <option value="4">{{ __('Cancelled') }}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save changes') }}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 @endsection
 
 
@@ -240,6 +299,18 @@
                     }
                 });
 
+            });
+
+            $(document).on('click', '.edit_status_modal', function(e) {
+                console.log('orderId');
+                e.preventDefault();
+                let order_id = $(this).data('id');
+                console.log('orderId', order_id);
+                let status = $(this).data('status');
+
+                $('#order_id_status').val(order_id);
+                $('#status').val(status);
+                $('.nice-select').niceSelect('update');
             });
 
         })(jQuery);

@@ -12,6 +12,7 @@ Route::group(['prefix'=>'buyer','middleware'=>['auth','inactiveuser','UserRoleCh
 
      //all orders 
      Route::get('/orders','Frontend\BuyerController@buyerOrders')->name('buyer.orders');
+     Route::post('/change-status','Frontend\BuyerController@orderStatus')->name('buyer.change.order.status');
      Route::get('/orders-details/{id}','Frontend\BuyerController@orderDetails')->name('buyer.order.details');
      Route::post('/approve-order-complete-request/{id}','Frontend\BuyerController@orderCompleteRequestApprove')->name('buyer.order.complete.request.approve');
 

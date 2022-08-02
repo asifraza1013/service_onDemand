@@ -80,10 +80,11 @@
                                             <label for="title" class="info-title"> {{__('Service Title*')}} </label>
                                             <input class="form--control" name="title" id="title" type="text" placeholder="{{__('Add tilte')}}">
                                         </div>
-                                        <div class="single-info-input margin-top-30">
+                                        <input class="form--control" name="tax" id="tax" value="0" min="0" type="hidden" step="0.01" placeholder="{{__('Add tax')}}">
+                                        {{-- <div class="single-info-input margin-top-30">
                                             <label for="tax" class="info-title"> {{__('Service Tax (%)')}} </label>
                                             <input class="form--control" name="tax" id="tax" value="0" min="0" type="number" step="0.01" placeholder="{{__('Add tax')}}">
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div class="single-dashboard-input">

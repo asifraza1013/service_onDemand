@@ -22,6 +22,8 @@ class Order extends Model
         'address',
         'city',
         'area',
+        'pay_after',
+        'pay_before',
         'country',
         'date',
         'schedule',

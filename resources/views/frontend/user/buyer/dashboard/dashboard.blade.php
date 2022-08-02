@@ -2,6 +2,21 @@
 @section('site-title')
     {{__('Buyer Dashboard')}}
 @endsection
+<style>
+
+.countdown {
+    width: 150px;
+    height: 150px;
+    background: lightblue;
+    margin: auto;
+    border-radius: 50%;
+    border: 2px dotted black;
+}
+.countdown h5 {
+    top: 40%;
+    position: relative;
+}
+</style>
 @section('content')
    
     <x-frontend.seller-buyer-preloader/>
@@ -122,6 +137,28 @@
                             </div>
                         </div>
                     </div>
+                    @if($currentOrder)
+                    <div class="single-flex-middle margin-top-40">
+                        <div class="line-charts-wrapper oreder_details_rtl">
+                            <div class="row">
+                                <div class="col-lg-6 div col-xl-6">
+                                    <h5>{{ __('Active Order') }}</h5>
+                                    @if($durationInMinuts > 45)
+                                    <strong class="text-danger">{{ __('Service Provider failed to reach on time. Please cancle order and request for refund.') }}</strong>
+                                    @else
+                                    <small>{{ __('If service providor failed to reach within 45 your amount will be refunded.') }}</small>
+                                    @endif
+                                </div>
+                                @if($totalDuration && $durationInMinuts < 45)
+                                <div class="col-lg-6 div col-xl-6">
+                                    <h5>{{ __('Time Left') }}</h5>
+                                    <div class="countdown"><h5 class="text-center"></h5></div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="dashboard-middle-flex style-02">
                         @if($last_10_order->count() >= 1)
                             <div class="single-flex-middle margin-top-40">
@@ -204,7 +241,29 @@
         <script>
             "use strict";
             $(document).ready(function () {
-               
+                // var timer2 = "5:11";
+                let startTime = "{{$totalDuration}}"
+                if(startTime){
+                    var timer2 = startTime;
+                    var interval = setInterval(function() {
+    
+    
+                    var timer = timer2.split(':');
+                    //by parsing integer, I avoid all extra string processing
+                    var minutes = parseInt(timer[0], 10);
+                    var seconds = parseInt(timer[1], 10);
+                    --seconds;
+                    minutes = (seconds < 0) ? --minutes : minutes;
+                    seconds = (seconds < 0) ? 59 : seconds;
+                    seconds = (seconds < 10) ? '0' + seconds : seconds;
+                    //minutes = (minutes < 10) ?  minutes : minutes;
+                    $('.countdown h5').html(minutes + ':' + seconds);
+                    if (minutes < 0) clearInterval(interval);
+                    //check if both minutes and seconds are 0
+                    if ((seconds <= 0) && (minutes <= 0)) clearInterval(interval);
+                    timer2 = minutes + ':' + seconds;
+                    }, 1000);
+                }
             });
         </script>
     @endsection    

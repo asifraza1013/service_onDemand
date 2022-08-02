@@ -53,6 +53,8 @@
                                                 <th> {{ __('Service Date') }} </th>
                                                 <th> {{ __('Service Time') }} </th>
                                                 <th> {{ __('Order Pricing') }} </th>
+                                                <th> {{ __('Amount Paid') }} </th>
+                                                <th> {{ __('Amount to collect') }} </th>
                                                 <th> {{ __('Payment Status') }} </th>
                                                 <th> {{ __('Order Status') }} </th>
                                                 <th> {{ __('Order Type') }} </th>
@@ -68,6 +70,8 @@
                                                     <td data-label="Service Date"> {{ Carbon\Carbon::parse($order->date)->format('d/m/y') }} </td>
                                                     <td data-label="Service Time"> {{ $order->schedule }}</td>
                                                     <td data-label="Order Pricing"> {{ float_amount_with_currency_symbol($order->total) }}</td>
+                                                    <td data-label="{{__('Order Pricing')}}"> {{ float_amount_with_currency_symbol($order->pay_before) }}</td>
+                                                    <td data-label="{{__('Order Pricing')}}"> {{ float_amount_with_currency_symbol($order->pay_after) }}</td>
                                                     <td data-label="Payment Status"> 
                                                         @if ($order->payment_status == 'pending')<span class="text-danger">{{ __('Pending') }}</span>@endif
                                                         @if ($order->payment_status == 'complete')<span class="text-success">{{ __('Complete') }}</span>@endif
@@ -194,7 +198,7 @@
                             <select name="status" id="status" class="form-control nice-select">
                                 <option value="">{{ __('Select Status') }}</option>
                                 <option value="0">{{ __('Pending') }}</option>
-                                <option value="1">{{ __('Active') }}</option>
+                                {{-- <option value="1">{{ __('Active') }}</option> --}}
                                 <option value="2">{{ __('Completed') }}</option>
                                 <option value="3">{{ __('Delivered') }}</option>
                                 <option value="4">{{ __('Cancelled') }}</option>

@@ -29,12 +29,12 @@
                                 <h2 class="dashboards-title"> {{__('Add Service Attributes')}} </h2>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <div class="dashboard-switch-single">
                                 <input class="custom-switch is_service_online" id="is_service_online" type="checkbox"/>{{__('Is Service Online:')}}
                                 <label class="switch-label" for="is_service_online"></label>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <x-error-message/>
                     <form action="{{route('seller.services.attributes.add')}}" method="post">

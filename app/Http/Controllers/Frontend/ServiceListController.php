@@ -380,6 +380,8 @@ class ServiceListController extends Controller
         $service_ids = [];
         $package_fee = 0;
 
+        $currentService = Service::where('id', $request->service_id)->first();
+
         if (isset($request->services) && is_array($request->services)) {
 
             foreach ($request->services as $key => $service) {
@@ -465,11 +467,13 @@ class ServiceListController extends Controller
 
         $sub_total = 0;
         $total = 0;
+        $pay_now = 0;
         $tax = Service::select('tax')->where('id', $request->service_id)->first();
         $sub_total = $package_fee + $extra_service;
         $tax_amount = ($sub_total * $tax->tax) / 100;
         $total = $sub_total + $tax_amount;
- 
+        $total = $total + config('constants.service_fee.'.$currentService->service_type);
+
         //calculate coupon amount
         $coupon_code = '';
         $coupon_type = '';
@@ -508,6 +512,8 @@ class ServiceListController extends Controller
         }else{
             $commission_amount = $commission->commission_charge;
         }
+        $pay_after = $total - config('constants.service_fee.'.$currentService->service_type);
+        $pay_now = config('constants.service_fee.'.$currentService->service_type);
 
         Order::where('id', $last_order_id)->update([
             'package_fee' => $package_fee,
@@ -515,12 +521,15 @@ class ServiceListController extends Controller
             'sub_total' => $sub_total,
             'tax' => $tax_amount,
             'total' => $total,
+            'pay_after' => $pay_after,
+            'pay_before' => $pay_now,
             'coupon_code' => $coupon_code,
             'coupon_type' => $coupon_type,
             'coupon_amount' => $coupon_amount,
             'commission_amount' => $commission_amount,
         ]);
 
+        $total = $pay_now;
 
         //Send order notification to seller
         $seller = User::where('id',$request->seller_id)->first();

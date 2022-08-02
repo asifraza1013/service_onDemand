@@ -102,7 +102,9 @@
 @endsection
 
 @section('content')
-
+@php
+  $serviceTypePrice = config('constants.service_fee.'.$service_details_for_book->service_type);
+@endphp
     <!-- Location Overview area starts -->
     <section class="location-overview-area padding-top-100">
         <div class="container">
@@ -347,6 +349,20 @@
                                         <div class="service-overview-summery">
                                             <h4 class="title"> {{ get_static_option('service_booking_title') ?? __('Booking Summery') }} </h4>
                                             <div class="overview-summery-contents">
+                                                <div class="single-summery">
+                                                    <span class="summery-title">{{ __('Platform fee to avail this service') }}</span>
+                                                    <div class="summery-list-all">
+                                                        <ul class="summery-list platform-fee-list"></ul>
+                                                        <ul class="summery-result-list result-border padding-bottom-20">
+                                                            <li class="result-list">
+                                                                <span class="rooms">{{ __('Total Fee') }}</span>
+                                                                <span class="value-count platform-fee">{{amount_with_currency_symbol($serviceTypePrice)}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="single-summery">
                                                     <span class="summery-title">
                                                         @if($service_details_for_book->is_service_online != 1)
@@ -619,6 +635,26 @@
                                             <h4 class="title">{{ get_static_option('service_booking_title') ?? __('Booking Summery') }}</h4>
                                             <div class="overview-summery-contents">
                                                 <div class="single-summery">
+                                                    <ul class='onlilne-special-list '>
+                                                        <span class="summery-title">{{ __('Charges to Use Service') }}</span>
+                                                    </ul>
+                                                </div>
+
+                                                {{-- platform fee to avail service --}}
+                                                <div class="single-summery">
+                                                    <span class="summery-title">{{ __('Platform fee to avail this service') }}</span>
+                                                    <div class="summery-list-all">
+                                                        <ul class="summery-list platform-fee-list"></ul>
+                                                        <ul class="summery-result-list result-border padding-bottom-20">
+                                                            <li class="result-list">
+                                                                <span class="rooms">{{ __('Total Fee') }}</span>
+                                                                <span class="value-count platform-fee">{{amount_with_currency_symbol($serviceTypePrice)}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div class="single-summery">
                                                     @if($service_details_for_book->is_service_online != 1)
                                                         {{ get_static_option('service_appoinment_package_title') ?? __('Appointment Package Service') }}
                                                     @else
@@ -676,21 +712,33 @@
                                                                 <span class="value-count tax-amount">$00</span>
                                                             </li>
                                                         </ul>
+                                                        <ul class="summery-result-list result-border padding-bottom-20">
+                                                            <li class="result-list">
+                                                                <span class="rooms text-danger"> <strong class="text-danger">{{ __('Amount to pay now') }}</strong> </span>
+                                                                <span class="value-count amount-to-pay-now">{{ $serviceTypePrice }}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="summery-result-list result-border padding-bottom-20">
+                                                            <li class="result-list">
+                                                                <span class="rooms text-danger"> <strong class="text-danger">{{ __('Amount to pay after service') }}</strong> </span>
+                                                                <span class="value-count amount-to-pay-after">$0.00</span>
+                                                            </li>
+                                                        </ul>
                                                         <ul class="summery-result-list">
                                                             <li class="result-list">
                                                                 <span class="rooms"> <strong>{{ get_static_option('service_total_amount_title') ?? __('Total') }}</strong></span>
                                                                 <span class="value-count total-amount total_amount_for_coupon" id="total_amount_for_coupon">$00</span>
                                                             </li>
                                                         </ul>
-                                                        <ul class="summery-result-list">
+                                                        {{-- <ul class="summery-result-list">
                                                             <li class="result-list coupon_amount_for_apply_code"></li>
-                                                        </ul>
-                                                        <ul class="summery-result-list coupon_input_field">
+                                                        </ul> --}}
+                                                        {{-- <ul class="summery-result-list coupon_input_field">
                                                             <li class="result-list">
                                                                 <input type="text" name="coupon_code" class="form-control coupon_code" placeholder="{{__('Enter Coupon Code')}}">
                                                                 <button class="apply-coupon">{{ __('Apply') }}</button>
                                                             </li>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </div>
                                                 </div>
 
@@ -845,7 +893,6 @@
             </div>
         </div>
     </div>
-    
 @endsection
 
 @include('frontend.pages.services.service-book-js')

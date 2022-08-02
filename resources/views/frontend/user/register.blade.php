@@ -33,7 +33,7 @@ $reg_type = request()->get('type') ?? 'buyer';
                                         <i class="las la-briefcase"></i>
                                     </div>
                                     <div class="contents">
-                                        <h4 class="title" id="seller"> {{ get_static_option('register_seller_title') ?? __('Seller') }}</h4>
+                                        <h4 class="title" id="seller"> {{ get_static_option('register_seller_title') ?? __('Service Provider') }}</h4>
                                     </div>
                                 </div>
                             </li>
@@ -43,7 +43,7 @@ $reg_type = request()->get('type') ?? 'buyer';
                                         <i class="las la-user-alt"></i>
                                     </div>
                                     <div class="contents">
-                                        <h4 class="title" id="buyer"> {{ get_static_option('register_buyer_title') ?? __('Buyer') }}</h4>
+                                        <h4 class="title" id="buyer"> {{ get_static_option('register_buyer_title') ?? __('Customer') }}</h4>
                                     </div>
                                 </div>
                             </li>
@@ -122,6 +122,13 @@ $reg_type = request()->get('type') ?? 'buyer';
                                         <div class="info-service">
                                             <div class="single-info-service margin-top-30">
                                                 <div class="single-content">
+                                                    <label class="forms-label"> {{ __('Address*') }} </label>
+                                                    <input class="form-control" type="text" name="address" id="autocomplete"
+                                                        placeholder="Address">
+                                                </div>
+                                            </div>
+                                            <div class="single-info-service margin-top-30">
+                                                <div class="single-content">
                                                     <label class="forms-label"> {{ __('Service Country*') }} </label>
                                                     <select name="country" id="country">
                                                         <option value="">{{ __('Select Country') }}</option>
@@ -171,8 +178,8 @@ $reg_type = request()->get('type') ?? 'buyer';
                                                     <div class="checkbox-inlines">
                                                         <input class="check-input" type="checkbox"
                                                             name="terms_conditions" id="terms_conditions">
-                                                        <label class="checkbox-label" for="terms_conditions">
-                                                            {{ __('I agree with the terms and conditions.') }} </label>
+                                                            <label class="checkbox-label" for="terms_conditions">
+                                                                I agree with the <a class="text-primary" href="{{url("terms-and-conditions")}}"> Terms & Condition </a> and <a class="text-primary" href="{{url("privacy-policy")}}">Privacy Policy<a/>.</label>
                                                     </div>
                                                 </div>
                                             </div>

@@ -21,6 +21,7 @@ use App\SupportDepartment;
 use App\SupportTicketMessage;
 use App\Events\SupportMessage;
 use App\Helpers\FlashMsg;
+use Carbon\Carbon;
 
 class BuyerController extends Controller
 {
@@ -41,7 +42,74 @@ class BuyerController extends Controller
         $last_10_order = Order::where('buyer_id',$buyer_id)->take(10)->latest()->get();
         $last_10_tickets = SupportTicket::where('buyer_id',$buyer_id)->take(10)->latest()->get();
 
-        return view('frontend.user.buyer.dashboard.dashboard',compact('pending_order','active_order','complete_order','total_order','last_10_order','last_10_tickets'));
+        $currentOrder = null;
+        $totalDuration = null;
+        $durationInMinuts = null;
+        if(count($last_10_order) && $last_10_order[0]->service_type == 2){
+            $currentOrder = $last_10_order[0];
+            if($currentOrder->status == 0 && $currentOrder->payment_status == 'complete'){
+                $currentOrder = $last_10_order[0];
+                $startTime = Carbon::parse($currentOrder->created_at);
+                $endTime = Carbon::parse(now());
+                $durationInMinuts = $endTime->diffInMinutes($startTime);
+                if($durationInMinuts < 45){
+                    $totalDuration = $endTime->diffInSeconds($startTime);
+                    $totalDuration = gmdate('i:s', $totalDuration);
+                }
+            }else{
+                $currentOrder = null;
+            }
+        }
+        return view('frontend.user.buyer.dashboard.dashboard',compact([
+            'pending_order',
+            'active_order',
+            'complete_order',
+            'total_order',
+            'last_10_order',
+            'last_10_tickets',
+            'currentOrder',
+            'totalDuration',
+            'durationInMinuts',
+        ]));
+    }
+
+    public function orderStatus(Request $request,$id=null)
+    {
+        $payment_status = Order::select('id','payment_status','status','email','name')->where('id',$request->order_id)->first();
+        if($payment_status->status !=2){
+            if($payment_status->payment_status =='complete'){
+
+                //get old status
+                if($payment_status->status ==0){
+                    $old_status = 'Pending';
+                }elseif($payment_status->status==1){
+                    $old_status = 'Active';
+                }elseif($payment_status->status==3){
+                    $old_status = 'Delivered';
+                }elseif($payment_status->status==4){
+                    $old_status = 'Cancelled';
+                }
+
+                Order::where('id',$request->order_id)->update(['status'=>$request->status]);
+
+                //get new status
+                if($request->status==1){
+                    $new_status = 'Active';
+                }elseif($request->status==4){
+                    $new_status = 'Cancelled';
+                }
+
+                toastr_success(__('Status Change Success---'));
+                return redirect()->back();
+            }else{
+                toastr_error(__('You can not change order status due to payment status pending'));
+                return redirect()->back();
+            }
+        }else{
+            toastr_error(__('You can not change order status because this order already completed.'));
+            return redirect()->back();
+        }
+        
     }
 
     public function buyerOrders()

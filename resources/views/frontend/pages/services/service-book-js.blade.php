@@ -6,6 +6,7 @@
 
             $(document).ready(function() {
                 let site_default_currency_symbol = '{{ site_currency_symbol() }}';
+                let platFormPrice = {{$serviceTypePrice}};
 
                 function extra_service_calculate(){
                     let additional_total_price = 0; 
@@ -23,6 +24,7 @@
 
                 function subtotal_calculate(){
                     let package_fee = parseInt($('.package-fee').text().replace(',','').replace(site_default_currency_symbol,''));
+                    package_fee += platFormPrice;
                     console.log(package_fee);
                     let extra_service_fee = parseInt($('.extra-service-fee').text().replace(',','').replace(site_default_currency_symbol,''));
                     let service_subtotal = package_fee+extra_service_fee;
@@ -37,6 +39,11 @@
                     let total_amount = subtotal+tax;
                     
                     $('.total-amount').text(site_default_currency_symbol+total_amount);
+
+                    let beforeAmount = platFormPrice;
+                    let afterAmount = total_amount - platFormPrice;
+                    $('.amount-to-pay-now').text(beforeAmount)
+                    $('.amount-to-pay-after').text(afterAmount)
                 }
                 total_amount()
 
@@ -507,7 +514,9 @@
                     
                     let additionals = [];
                     let additional_services = $("li.additional_service_list");
-
+                    let amount_to_pay_now = parseInt($('.amount-to-pay-now').text().replace(',','').replace(site_default_currency_symbol,''));
+                    let amount_to_pay_after = parseInt($('.amount-to-pay-after').text().replace(',','').replace(site_default_currency_symbol,''));
+                    
                     for (let i = 0; i < additional_services.length; i++) {
                         let additional_service_quantity = $(additional_services[i]).find('.additional_service_quantity').text();
                         let additional_service_id = $(additional_services[i]).find('.additionalServiceID').val();
@@ -517,6 +526,8 @@
                         })
                         $('#msform').append('<input type="hidden" name="additionals['+i+'][id]" value="'+additional_service_id+'"/>');
                         $('#msform').append('<input type="hidden" name="additionals['+i+'][quantity]" value="'+additional_service_quantity+'"/>');
+                        $('#msform').append('<input type="hidden" name="pay_now" value="'+amount_to_pay_now+'"/>');
+                        $('#msform').append('<input type="hidden" name="pay_after" value="'+amount_to_pay_after+'"/>');
                     }
 
                 });
